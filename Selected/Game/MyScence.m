@@ -11,6 +11,7 @@
 #import "PlayRullView.h"
 #import "OpenResultView.h"
 #import "PaiHangView.h"
+#import "BetResultView.h"
 
 @interface MyScence(){
     BOOL isChipSprite;
@@ -156,6 +157,7 @@
     gameStatusView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.6];
     gameStatusView.layer.cornerRadius = 13;
     gameStatusView.layer.masksToBounds = YES;
+    [gameStatusView addTarget:self action:@selector(betResultView) forControlEvents:UIControlEventTouchUpInside];
     
     UIImageView *gameStatusUp = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"矢量智能对象"]];
     gameStatusUp.frame = CGRectMake(5, 9, 10, 8);
@@ -507,6 +509,12 @@
     [self.view addSubview:open];
 }
 
+//投注记录
+-(void)betResultView
+{
+    BetResultView *betresult = [[BetResultView alloc] initWithFrame:self.view.frame];
+    [self.view addSubview:betresult];
+}
 
 //清除用户投注
 -(void)cleanUserChip{

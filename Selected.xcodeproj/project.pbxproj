@@ -35,6 +35,7 @@
 		FABCD77B226AC234002311E1 /* GameController.m in Sources */ = {isa = PBXBuildFile; fileRef = FABCD77A226AC234002311E1 /* GameController.m */; };
 		FABCD77F226ACDE8002311E1 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FABCD77E226ACDE8002311E1 /* GameScene.sks */; };
 		FABCD781226AD14B002311E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FABCD780226AD14B002311E1 /* LaunchScreen.storyboard */; };
+		FAE17C1C228C45FA007B4A6E /* BetResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE17C1A228C45FA007B4A6E /* BetResultView.m */; };
 		FAFBE376228AF6AB00301E55 /* SinglopenResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFBE36E228AF6AB00301E55 /* SinglopenResultView.m */; };
 		FAFBE377228AF6AB00301E55 /* PaiHangView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFBE36F228AF6AB00301E55 /* PaiHangView.m */; };
 		FAFBE378228AF6AB00301E55 /* OpenResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFBE370228AF6AB00301E55 /* OpenResultView.m */; };
@@ -122,6 +123,8 @@
 		FABCD780226AD14B002311E1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FABCD783226B25C6002311E1 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		FABCD784226B25D3002311E1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		FAE17C1A228C45FA007B4A6E /* BetResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetResultView.m; sourceTree = "<group>"; };
+		FAE17C1B228C45FA007B4A6E /* BetResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetResultView.h; sourceTree = "<group>"; };
 		FAFBE36C228AF6AB00301E55 /* OpenResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenResultTableViewCell.h; sourceTree = "<group>"; };
 		FAFBE36D228AF6AB00301E55 /* PlayRullView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayRullView.h; sourceTree = "<group>"; };
 		FAFBE36E228AF6AB00301E55 /* SinglopenResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SinglopenResultView.m; sourceTree = "<group>"; };
@@ -190,6 +193,8 @@
 				FAFBE374228AF6AB00301E55 /* PlayRullView.m */,
 				FAFBE372228AF6AB00301E55 /* SinglopenResultView.h */,
 				FAFBE36E228AF6AB00301E55 /* SinglopenResultView.m */,
+				FAE17C1B228C45FA007B4A6E /* BetResultView.h */,
+				FAE17C1A228C45FA007B4A6E /* BetResultView.m */,
 			);
 			path = "百人牛牛";
 			sourceTree = "<group>";
@@ -528,6 +533,7 @@
 				FAA5458722704896001CCA0C /* STParallaxNodeLayer.m in Sources */,
 				FABCD748226AB9BB002311E1 /* ViewController.m in Sources */,
 				FA1ED8232289941B008DF68C /* UIButton+Util.m in Sources */,
+				FAE17C1C228C45FA007B4A6E /* BetResultView.m in Sources */,
 				FAA5458922704896001CCA0C /* STControlNode.m in Sources */,
 				FAA5458A22704896001CCA0C /* SKNode+STAdditions.m in Sources */,
 				FA1ED8182289941B008DF68C /* UIView+Util.m in Sources */,
