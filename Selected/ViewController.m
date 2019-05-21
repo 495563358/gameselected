@@ -18,8 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    
-    self.view.backgroundColor = [UIColor blueColor];
+    UIImageView *image = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"111111"]];
+    image.frame = CGRectMake(0, ScreenHeight/2-ScreenWidth/2, ScreenWidth, ScreenWidth);
+    [self.view addSubview:image];
     GameController *vc = [GameController new];
     [self.navigationController pushViewController:vc animated:YES];
     

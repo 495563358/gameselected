@@ -12,6 +12,9 @@
 #import "OpenResultView.h"
 #import "PaiHangView.h"
 #import "BetResultView.h"
+#import "RecentlyCowResultView.h"
+
+#import <AVFoundation/AVFoundation.h>
 
 @interface MyScence(){
     BOOL isChipSprite;
@@ -20,13 +23,19 @@
     NSArray *_imageNameArr;
     
     int timeCount;
+    
+    int closeMusic;//是否关闭音乐
+    int closeSound;//音效
 }
 @property (nonatomic,strong)UILabel *gameIssueLab;//游戏当前局数
 @property (nonatomic,strong)UILabel *betStatusLab;//投注当前状态
 @property (nonatomic,strong)UILabel *betTimeLab;//投注剩余时间
-
+@property (nonatomic,strong)UIButton *totalBetBtn;
 @property(nonatomic,strong)SKSpriteNode *background;
 @property(nonatomic,strong)SKSpriteNode *moreSettingSprite;//更多设置
+@property(nonatomic,strong)AVAudioPlayer *audioplayer;//背景音乐播放
+@property(nonatomic,strong)NSMutableDictionary<NSString *,NSNumber *> *soundIDDict;//音效资源
+
 @property(nonatomic,strong)STControlSprite *onlineUser;
 @property(nonatomic,strong)SKSpriteNode *chipView;//筹码
 @property(nonatomic,strong)SKSpriteNode *selectedChip;//筹码
@@ -34,7 +43,8 @@
 @property(nonatomic,strong)NSMutableArray<STControlSprite *> *deskSpriteArr;//下注的桌子
 @property(nonatomic,strong)NSMutableArray<SKSpriteNode *> *chipSpriteArr;//下注可以点击的筹码
 @property(nonatomic,strong)NSMutableArray<NSMutableArray<SKSpriteNode *> *> *moneySpriteArr;//洒出来的筹码
-@property(nonatomic,strong)NSMutableArray<SKLabelNode *> *countLabelArr;//洒出来的筹码
+@property(nonatomic,strong)NSMutableArray<SKLabelNode *> *userCountLabelArr;//用户下注计数Label
+@property(nonatomic,strong)NSMutableArray<SKLabelNode *> *totalCountLabelArr;//每张桌子下注计数Label
 
 
 @property (nonatomic,strong)YYTimer *countTimer;
@@ -49,14 +59,29 @@
 
 -(void)didMoveToView:(SKView *)view{
     NSLog(@"didMoveToView = %@",view);
-    
-    _imageNameArr = @[@"ship1",@"ship5",@"ship10",@"ship50",@"ship100",@"ship500",@"ship1000",@"ship5000",@"ship10000"];
+    [self initData];
     [self createUI];
     
     [self sendCard];
     
     timeCount = 30;
+    
+    
 //    self.countTimer = [[YYTimer alloc] initWithFireTime:0 interval:1 target:self selector:@selector(timeCountDown) repeats:YES];
+}
+
+//初始化数据
+-(void)initData{
+    //筹码数据
+    _imageNameArr = @[@"ship1",@"ship5",@"ship10",@"ship50",@"ship100",@"ship500",@"ship1000",@"ship5000",@"ship10000"];
+    
+    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
+    closeMusic = [[user objectForKey:@"CloseMusic"] intValue];
+    closeSound = [[user objectForKey:@"CloseSound"] intValue];
+    
+    if (!closeMusic) {
+        [self.audioplayer play];
+    }
 }
 
 -(void)timeCountDown{
@@ -112,8 +137,6 @@
 }
 
 
-
-
 -(void)createUI{
     self.backgroundColor = [UIColor whiteColor];
     // Setup your scene here
@@ -129,7 +152,7 @@
     backSprite.size = CGSizeMake(36, 36);
     backSprite.name = @"back";
     [backSprite setTouchUpInsideBlock:^{
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"exitgame" object:nil];
+        [self exitGame];
     }];
     [self addChild:backSprite];
     
@@ -178,20 +201,7 @@
     zhuang.size = CGSizeMake(30, 30);
     zhuang.position = CGPointMake(ScreenWidth/2, backSpriteCenterY);
     [zhuang setTouchUpInsideBlock:^{
-        [self openCard:1 andResult:@[@"1",@"2",@"3",@"4",@"5"]];
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,(int64_t)(1*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self openCard:2 andResult:@[@"1",@"2",@"3",@"4",@"5"]];
-        });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,(int64_t)(2*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self openCard:3 andResult:@[@"1",@"2",@"3",@"4",@"5"]];
-        });
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,(int64_t)(3*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self openCard:0 andResult:@[@"1",@"2",@"3",@"4",@"5"]];
-        });
+        self.countTimer = [[YYTimer alloc] initWithFireTime:0 interval:1 target:self selector:@selector(timeCountDown) repeats:YES];
     }];
     [self addChild:zhuang];
     
@@ -224,6 +234,14 @@
     _xian3.position = CGPointMake(startX + spaceX * 3, backSpriteCenterY);
     [self addChild:_xian3];
     
+    CGFloat width = (ScreenWidth - 80)/4;
+    CGFloat cardW =  width/2.5;
+    CGFloat cardH = cardW * 80 / 56;
+    RecentlyCowResultView *recent = [[RecentlyCowResultView alloc] initWithFrame:CGRectMake(0, SafeAreaTopHeight + 38 + cardH + 10, ScreenWidth, 30)];
+    [self.view addSubview:recent];
+    
+    
+    
     _onlineUser = [STControlSprite spriteNodeWithImageNamed:@"组-42"];
     _onlineUser.position = CGPointMake(ScreenWidth - 40, _xian3.position.y - 130);
     WEAKSELF;
@@ -233,8 +251,42 @@
     }];
     [self addChild:_onlineUser];
     
+    
+    UIButton *totalBetBtn = [UIButton buttonWithLocalImage:nil title:@"总下注 0 " titleColor:[UIColor whiteColor] fontSize:14 frame:CGRectMake(ScreenWidth/2 - ScreenWidth/8, ScreenHeight/2.5, ScreenWidth/4, 26)];
+    totalBetBtn.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.4];
+    totalBetBtn.layer.cornerRadius = 13;
+    totalBetBtn.layer.masksToBounds = YES;
+    [totalBetBtn addTarget:self action:@selector(playBackGroundMP3) forControlEvents:UIControlEventTouchUpInside];
+    self.totalBetBtn = totalBetBtn;
+    [self.view addSubview:totalBetBtn];
+    
     [self createFooter];
     [self createCenter];
+}
+
+-(void)playBackGroundMP3{
+    [self playSoundWithFileName:@"NiuNone"];
+    NSLog(@"%@",self.soundIDDict);
+    //    [self playSoundWithFileName:@"NiuYi"];
+    //    [self playSoundWithFileName:@"NiuEr"];
+    //    [self playSoundWithFileName:@"NiuSan"];
+}
+
+//播放音效
+-(void)playSoundWithFileName:(NSString *)fileName{
+    if (closeSound) {
+        return;
+    }
+    NSNumber *idNumber = self.soundIDDict[fileName];
+    if (idNumber) {
+        AudioServicesPlaySystemSound(idNumber.intValue);
+    }else{
+        NSURL *soundUrl = [[NSBundle mainBundle] URLForResource:fileName withExtension:@"mp3"];
+        SystemSoundID soundID = 0;
+        AudioServicesCreateSystemSoundID((__bridge CFURLRef)soundUrl, &soundID);
+        AudioServicesPlaySystemSound(soundID);
+        [self.soundIDDict setObject:[NSNumber numberWithInt:soundID] forKey:fileName];
+    }
 }
 
 -(void)createCenter{
@@ -257,11 +309,17 @@
         }];
         [self addChild:desk];
         
+        SKLabelNode *totalLab = [SKLabelNode labelNodeWithText:@"20000"];
+        totalLab.fontSize = 12;
+        totalLab.position = CGPointMake(0, squreH/2 - 12);
+        [desk addChild:totalLab];
+        [self.totalCountLabelArr addObject:totalLab];
+        
         SKLabelNode *text = [SKLabelNode labelNodeWithText:@"0"];
         text.fontSize = 12;
         text.position = CGPointMake(0, -squreH/2 + 2);
         [desk addChild:text];
-        [self.countLabelArr addObject:text];
+        [self.userCountLabelArr addObject:text];
         
         [_deskSpriteArr addObject:desk];
         if (x == 0) {
@@ -288,7 +346,7 @@
         CGFloat minX = desk.position.x - desk.size.width/2 + 15;
         CGFloat maxX = desk.position.x + desk.size.width/2 - 15;
         CGFloat minY = desk.position.y - desk.size.height/2 + 25;
-        CGFloat maxY = desk.position.y + desk.size.height/2 - 15;
+        CGFloat maxY = desk.position.y + desk.size.height/2 - 25;
         int spaceX = [NSString stringWithFormat:@"%f",maxX - minX].intValue;
         int spaceY = [NSString stringWithFormat:@"%f",maxY - minY].intValue;
         int arcX = arc4random()%spaceX;
@@ -298,7 +356,7 @@
         [self.moneySpriteArr[selectDeskIndex] addObject:chip];
         
         //计算投注金额
-        SKLabelNode *label = self.countLabelArr[selectDeskIndex];
+        SKLabelNode *label = self.userCountLabelArr[selectDeskIndex];
         //已下注金额
         NSInteger total = [label.text integerValue];
         //当前选择筹码
@@ -336,16 +394,17 @@
     
     SKSpriteNode *cancel = [SKSpriteNode spriteNodeWithImageNamed:@"撤销"];
 //    cancel.anchorPoint = CGPointMake(-1, 1);
-    cancel.position = CGPointMake( cancel.frame.size.width/2 - ScreenWidth/2, 0);
+    cancel.position = CGPointMake( cancel.frame.size.width/2 - ScreenWidth/2, kBottomSafeHeight/2);
     cancel.name = @"撤销";
     [footer addChild:cancel];
     
     SKSpriteNode *sure = [SKSpriteNode spriteNodeWithImageNamed:@"确认"];
     sure.name = @"确认";
-    sure.position = CGPointMake( ScreenWidth/2 - cancel.frame.size.width/2 , 0);
+    sure.position = CGPointMake( ScreenWidth/2 - cancel.frame.size.width/2 , kBottomSafeHeight/2);
     [footer addChild:sure];
     
     STControlSprite *moneySp = [STControlSprite spriteNodeWithImageNamed:@"圆角矩形-3"];
+    moneySp.position = CGPointMake(0, kBottomSafeHeight/2);
     [moneySp setTouchUpInsideBlock:^{
         NSLog(@"chongzhi");
     }];
@@ -388,7 +447,7 @@
     }
     
     if ([node.name isEqualToString:@"确认"]) {
-        
+        [self.countTimer invalidate];
     }
     if ([node.name isEqualToString:@"撤销"]) {
         [self cleanUserChip];
@@ -431,16 +490,29 @@
         more.zRotation = M_PI_2;
         [self addChild:more];
         NSArray *imageArr = @[@"问号",@"音符",@"音乐-(1)"];
+        NSArray *closedImgArr = @[@"问号",@"音符-1",@"音乐-1"];
         NSArray *nameArr = @[@"玩法",@"音效",@"音乐"];
         
         for (int i = 0; i < 3; i ++) {
             STControlSprite *control = [STControlSprite spriteNodeWithColor:[UIColor clearColor] size:CGSizeMake(width, height/3)];
             control.position = CGPointMake(0, height/3 - i * height/3);
             
-            
-            SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:imageArr[i]];
+            NSString *imageName = imageArr[i];
+            int tag = 0;
+            if (i == 1) {
+                if (closeSound) {
+                    imageName = closedImgArr[i];
+                    tag = 1;
+                }
+            }else if (i == 2){
+                if (closeMusic) {
+                    imageName = closedImgArr[i];
+                    tag = 1;
+                }
+            }
+            SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:imageName];
             sprite.position = CGPointMake(-width/2 + width/4, 0);
-            sprite.name = @"0";
+            sprite.name = [NSString stringWithFormat:@"%i",tag];
             
             SKLabelNode *lab = [SKLabelNode labelNodeWithText:nameArr[i]];
             lab.fontSize = 15;
@@ -457,24 +529,38 @@
                     [self.view addSubview:playrull];
                 }else if (i == 1){
                     //音效
+                    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
                     if ([sprite.name isEqualToString:@"0"]) {
                         //取消音效
+                        self->closeSound = 1;
                         sprite.name = @"1";
                         [sprite setTexture:[SKTexture textureWithImageNamed:@"音符-1"]];
+                        [user setObject:@"1" forKey:@"CloseSound"];
                     }else{
+                        self->closeSound = 0;
                         sprite.name = @"0";
                         [sprite setTexture:[SKTexture textureWithImageNamed:@"音符"]];
+                        [user setObject:@"0" forKey:@"CloseSound"];
                     }
+                    [user synchronize];
                 }else{
                     //音乐
+                    NSUserDefaults *user = [NSUserDefaults standardUserDefaults];
                     if ([sprite.name isEqualToString:@"0"]) {
                         //取消音乐
+                        [self.audioplayer pause];
+                        self->closeMusic = 1;
                         sprite.name = @"1";
                         [sprite setTexture:[SKTexture textureWithImageNamed:@"音乐-1"]];
+                        [user setObject:@"1" forKey:@"CloseMusic"];
                     }else{
+                        [self.audioplayer play];
+                        self->closeMusic = 0;
                         sprite.name = @"0";
                         [sprite setTexture:[SKTexture textureWithImageNamed:@"音乐-(1)"]];
+                        [user setObject:@"0" forKey:@"CloseMusic"];
                     }
+                    [user synchronize];
                 }
             }];
         }
@@ -518,8 +604,8 @@
 
 //清除用户投注
 -(void)cleanUserChip{
-    for (int i = 0; i<self.countLabelArr.count; i++) {
-        self.countLabelArr[i].text = @"0";
+    for (int i = 0; i<self.userCountLabelArr.count; i++) {
+        self.userCountLabelArr[i].text = @"0";
     }
 }
 
@@ -550,7 +636,7 @@
     CGFloat minX = desk.position.x - desk.size.width/2 + 15;
     CGFloat maxX = desk.position.x + desk.size.width/2 - 15;
     CGFloat minY = desk.position.y - desk.size.height/2 + 25;
-    CGFloat maxY = desk.position.y + desk.size.height/2 - 15;
+    CGFloat maxY = desk.position.y + desk.size.height/2 - 25;
     int spaceX = [NSString stringWithFormat:@"%f",maxX - minX].intValue;
     int spaceY = [NSString stringWithFormat:@"%f",maxY - minY].intValue;
     int arcX = arc4random()%spaceX;
@@ -630,7 +716,7 @@
         CGFloat minX = desk.position.x - desk.size.width/2 + 15;
         CGFloat maxX = desk.position.x + desk.size.width/2 - 15;
         CGFloat minY = desk.position.y - desk.size.height/2 + 25;
-        CGFloat maxY = desk.position.y + desk.size.height/2 - 15;
+        CGFloat maxY = desk.position.y + desk.size.height/2 - 25;
         
         int arcNum = arc4random()%5 + 3;
         
@@ -832,11 +918,47 @@
     }return _moneySpriteArr;
 }
 
--(NSMutableArray<SKLabelNode *> *)countLabelArr{
-    if (!_countLabelArr) {
-        _countLabelArr = [NSMutableArray array];
+-(NSMutableArray<SKLabelNode *> *)userCountLabelArr{
+    if (!_userCountLabelArr) {
+        _userCountLabelArr = [NSMutableArray array];
     }
-    return _countLabelArr;
+    return _userCountLabelArr;
+}
+
+-(NSMutableArray<SKLabelNode *> *)totalCountLabelArr{
+    if (!_totalCountLabelArr) {
+        _totalCountLabelArr = [NSMutableArray array];
+    }
+    return _totalCountLabelArr;
+}
+
+-(AVAudioPlayer *)audioplayer{
+    if (!_audioplayer) {
+        
+        NSURL *videoUrl = [[NSBundle mainBundle] URLForResource:@"bg1" withExtension:@"mp3"];
+        _audioplayer = [[AVAudioPlayer alloc] initWithContentsOfURL:videoUrl error:Nil];
+        [_audioplayer prepareToPlay];
+    }return _audioplayer;
+}
+
+-(NSMutableDictionary *)soundIDDict{
+    if (!_soundIDDict) {
+        _soundIDDict = [NSMutableDictionary dictionary];
+    }return _soundIDDict;
+}
+
+-(void)exitGame{
+    [self.audioplayer stop];
+    self.audioplayer = nil;
+    
+    //销毁音效
+    for (NSNumber *number in self.soundIDDict.allValues) {
+        AudioServicesDisposeSystemSoundID(number.intValue);
+    }
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"exitgame" object:nil];
+    
+    
 }
 
 @end
