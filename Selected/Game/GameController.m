@@ -34,6 +34,7 @@
 }
 
 -(void)addNotification{
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(exitGame) name:@"exitgame" object:nil];
     
 }

@@ -35,26 +35,30 @@
     backimage.userInteractionEnabled = YES;
     [self addSubview:backimage];
     
-    UIButton *closed = [[UIButton alloc] init];
-    closed.backgroundColor = [UIColor clearColor];
-    [closed setImage:[UIImage imageNamed:@"删除"] forState:UIControlStateNormal];
+//    UIButton *closed = [[UIButton alloc] init];
+//    closed.backgroundColor = [UIColor redColor];
+//    [closed setImage:[UIImage imageNamed:@"删除"] forState:UIControlStateNormal];
+//    [closed addTarget:self action:@selector(hideView) forControlEvents:UIControlEventTouchUpInside];
+//    [backimage addSubview:closed];
+//    [closed  mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.top.equalTo(backimage.mas_top).with.offset(-15);
+//        make.left.equalTo(backimage.mas_right).with.offset(-15);
+//        make.bottom.equalTo(backimage.mas_top).with.offset(15);
+//        make.right.equalTo(backimage.mas_right).with.offset(15);
+//        
+//    }];
     
-    [closed addTarget:self action:@selector(hideView) forControlEvents:UIControlEventTouchUpInside];
-    [backimage addSubview:closed];
-    [closed  mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(backimage.mas_top).with.offset(-15);
-        make.left.equalTo(backimage.mas_right).with.offset(-15);
-        make.bottom.equalTo(backimage.mas_top).with.offset(15);
-        make.right.equalTo(backimage.mas_right).with.offset(15);
-        
-    }];
+    
+    UITapGestureRecognizer *closeTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideView)];
+    [self addGestureRecognizer:closeTap];
+    
 }
 
 
 
 
 -(void)hideView{
-    
+    NSLog(@">>>>>>>>>>>>");
     [self removeFromSuperview];
 }
 @end
