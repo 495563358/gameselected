@@ -261,6 +261,28 @@
 			path = Category;
 			sourceTree = "<group>";
 		};
+		FA20B50C2296C97000F5CA2F /* 牛牛 */ = {
+			isa = PBXGroup;
+			children = (
+				FAD9F2F92292BA0F00E537E3 /* bg1.mp3 */,
+				FAD9F2FB2292BA0F00E537E3 /* NiuNone.mp3 */,
+				FAD9F3002292BA0F00E537E3 /* NiuYi.mp3 */,
+				FAD9F2FD2292BA0F00E537E3 /* NiuEr.mp3 */,
+				FAD9F2FA2292BA0F00E537E3 /* NiuSan.mp3 */,
+				FAD9F2FC2292BA0F00E537E3 /* NiuSi.mp3 */,
+				FAD9F3012292BA0F00E537E3 /* NiuWu.mp3 */,
+				FAD9F2F72292BA0F00E537E3 /* NiuLiu.mp3 */,
+				FAD9F2F82292BA0F00E537E3 /* NiuQi.mp3 */,
+				FAD9F3022292BA0F00E537E3 /* NiuBa.mp3 */,
+				FAD9F2F52292BA0F00E537E3 /* NiuJiu.mp3 */,
+				FAD9F2F62292BA0F00E537E3 /* NiuNiu.mp3 */,
+				FAD9F2FE2292BA0F00E537E3 /* FamaleZhaDanNiu.mp3 */,
+				FAD9F2FF2292BA0F00E537E3 /* FamaleSiHuaNiu.mp3 */,
+				FAD9F3032292BA0F00E537E3 /* FamaleWuHuaNiu.mp3 */,
+			);
+			path = "牛牛";
+			sourceTree = "<group>";
+		};
 		FAA5457322704880001CCA0C /* Vender */ = {
 			isa = PBXGroup;
 			children = (
@@ -328,7 +350,7 @@
 				FABCD746226AB9BB002311E1 /* ViewController.h */,
 				FABCD747226AB9BB002311E1 /* ViewController.m */,
 				FABCD780226AD14B002311E1 /* LaunchScreen.storyboard */,
-				FAD9F2F42292BA0F00E537E3 /* 百人牛牛 */,
+				FAD9F2F42292BA0F00E537E3 /* 音乐资源 */,
 				FABCD74C226AB9BC002311E1 /* Assets.xcassets */,
 				FABCD751226AB9BC002311E1 /* Info.plist */,
 				FABCD752226AB9BC002311E1 /* main.m */,
@@ -375,27 +397,13 @@
 			path = Macros;
 			sourceTree = "<group>";
 		};
-		FAD9F2F42292BA0F00E537E3 /* 百人牛牛 */ = {
+		FAD9F2F42292BA0F00E537E3 /* 音乐资源 */ = {
 			isa = PBXGroup;
 			children = (
-				FAD9F2F92292BA0F00E537E3 /* bg1.mp3 */,
-				FAD9F2FB2292BA0F00E537E3 /* NiuNone.mp3 */,
-				FAD9F3002292BA0F00E537E3 /* NiuYi.mp3 */,
-				FAD9F2FD2292BA0F00E537E3 /* NiuEr.mp3 */,
-				FAD9F2FA2292BA0F00E537E3 /* NiuSan.mp3 */,
-				FAD9F2FC2292BA0F00E537E3 /* NiuSi.mp3 */,
-				FAD9F3012292BA0F00E537E3 /* NiuWu.mp3 */,
-				FAD9F2F72292BA0F00E537E3 /* NiuLiu.mp3 */,
-				FAD9F2F82292BA0F00E537E3 /* NiuQi.mp3 */,
-				FAD9F3022292BA0F00E537E3 /* NiuBa.mp3 */,
-				FAD9F2F52292BA0F00E537E3 /* NiuJiu.mp3 */,
-				FAD9F2F62292BA0F00E537E3 /* NiuNiu.mp3 */,
-				FAD9F2FE2292BA0F00E537E3 /* FamaleZhaDanNiu.mp3 */,
-				FAD9F2FF2292BA0F00E537E3 /* FamaleSiHuaNiu.mp3 */,
-				FAD9F3032292BA0F00E537E3 /* FamaleWuHuaNiu.mp3 */,
+				FA20B50C2296C97000F5CA2F /* 牛牛 */,
 			);
-			name = "百人牛牛";
-			path = "../../棋牌资源/百人牛牛";
+			name = "音乐资源";
+			path = "../../棋牌资源/音乐资源";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
