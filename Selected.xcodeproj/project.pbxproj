@@ -18,6 +18,7 @@
 		FA1ED8232289941B008DF68C /* UIButton+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1ED8142289941A008DF68C /* UIButton+Util.m */; };
 		FA1ED8242289941B008DF68C /* UITabBar+badge.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1ED8152289941A008DF68C /* UITabBar+badge.m */; };
 		FA1ED8252289941B008DF68C /* NSString+DecimalNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = FA1ED8162289941A008DF68C /* NSString+DecimalNumber.m */; };
+		FA9DCF7F228EBEEF0025E9C1 /* RecentlyCowResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = FA9DCF7E228EBEEF0025E9C1 /* RecentlyCowResultView.m */; };
 		FAA5458622704896001CCA0C /* STParallaxNode.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA5457522704896001CCA0C /* STParallaxNode.m */; };
 		FAA5458722704896001CCA0C /* STParallaxNodeLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA5457622704896001CCA0C /* STParallaxNodeLayer.m */; };
 		FAA5458822704896001CCA0C /* SKScene+STAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = FAA5457722704896001CCA0C /* SKScene+STAdditions.m */; };
@@ -35,6 +36,21 @@
 		FABCD77B226AC234002311E1 /* GameController.m in Sources */ = {isa = PBXBuildFile; fileRef = FABCD77A226AC234002311E1 /* GameController.m */; };
 		FABCD77F226ACDE8002311E1 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = FABCD77E226ACDE8002311E1 /* GameScene.sks */; };
 		FABCD781226AD14B002311E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FABCD780226AD14B002311E1 /* LaunchScreen.storyboard */; };
+		FAD9F3042292BA0F00E537E3 /* NiuJiu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F2F52292BA0F00E537E3 /* NiuJiu.mp3 */; };
+		FAD9F3052292BA0F00E537E3 /* NiuNiu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F2F62292BA0F00E537E3 /* NiuNiu.mp3 */; };
+		FAD9F3062292BA0F00E537E3 /* NiuLiu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F2F72292BA0F00E537E3 /* NiuLiu.mp3 */; };
+		FAD9F3072292BA0F00E537E3 /* NiuQi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F2F82292BA0F00E537E3 /* NiuQi.mp3 */; };
+		FAD9F3082292BA0F00E537E3 /* bg1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F2F92292BA0F00E537E3 /* bg1.mp3 */; };
+		FAD9F3092292BA0F00E537E3 /* NiuSan.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F2FA2292BA0F00E537E3 /* NiuSan.mp3 */; };
+		FAD9F30A2292BA0F00E537E3 /* NiuNone.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F2FB2292BA0F00E537E3 /* NiuNone.mp3 */; };
+		FAD9F30B2292BA0F00E537E3 /* NiuSi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F2FC2292BA0F00E537E3 /* NiuSi.mp3 */; };
+		FAD9F30C2292BA0F00E537E3 /* NiuEr.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F2FD2292BA0F00E537E3 /* NiuEr.mp3 */; };
+		FAD9F30D2292BA0F00E537E3 /* FamaleZhaDanNiu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F2FE2292BA0F00E537E3 /* FamaleZhaDanNiu.mp3 */; };
+		FAD9F30E2292BA0F00E537E3 /* FamaleSiHuaNiu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F2FF2292BA0F00E537E3 /* FamaleSiHuaNiu.mp3 */; };
+		FAD9F30F2292BA0F00E537E3 /* NiuYi.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F3002292BA0F00E537E3 /* NiuYi.mp3 */; };
+		FAD9F3102292BA0F00E537E3 /* NiuWu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F3012292BA0F00E537E3 /* NiuWu.mp3 */; };
+		FAD9F3112292BA0F00E537E3 /* NiuBa.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F3022292BA0F00E537E3 /* NiuBa.mp3 */; };
+		FAD9F3122292BA0F00E537E3 /* FamaleWuHuaNiu.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = FAD9F3032292BA0F00E537E3 /* FamaleWuHuaNiu.mp3 */; };
 		FAE17C1C228C45FA007B4A6E /* BetResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAE17C1A228C45FA007B4A6E /* BetResultView.m */; };
 		FAFBE376228AF6AB00301E55 /* SinglopenResultView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFBE36E228AF6AB00301E55 /* SinglopenResultView.m */; };
 		FAFBE377228AF6AB00301E55 /* PaiHangView.m in Sources */ = {isa = PBXBuildFile; fileRef = FAFBE36F228AF6AB00301E55 /* PaiHangView.m */; };
@@ -84,6 +100,8 @@
 		FA1ED8142289941A008DF68C /* UIButton+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+Util.m"; sourceTree = "<group>"; };
 		FA1ED8152289941A008DF68C /* UITabBar+badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITabBar+badge.m"; sourceTree = "<group>"; };
 		FA1ED8162289941A008DF68C /* NSString+DecimalNumber.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+DecimalNumber.m"; sourceTree = "<group>"; };
+		FA9DCF7D228EBEEF0025E9C1 /* RecentlyCowResultView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RecentlyCowResultView.h; sourceTree = "<group>"; };
+		FA9DCF7E228EBEEF0025E9C1 /* RecentlyCowResultView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecentlyCowResultView.m; sourceTree = "<group>"; };
 		FAA5457522704896001CCA0C /* STParallaxNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STParallaxNode.m; sourceTree = "<group>"; };
 		FAA5457622704896001CCA0C /* STParallaxNodeLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = STParallaxNodeLayer.m; sourceTree = "<group>"; };
 		FAA5457722704896001CCA0C /* SKScene+STAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKScene+STAdditions.m"; sourceTree = "<group>"; };
@@ -123,6 +141,21 @@
 		FABCD780226AD14B002311E1 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FABCD783226B25C6002311E1 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		FABCD784226B25D3002311E1 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		FAD9F2F52292BA0F00E537E3 /* NiuJiu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NiuJiu.mp3; sourceTree = "<group>"; };
+		FAD9F2F62292BA0F00E537E3 /* NiuNiu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NiuNiu.mp3; sourceTree = "<group>"; };
+		FAD9F2F72292BA0F00E537E3 /* NiuLiu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NiuLiu.mp3; sourceTree = "<group>"; };
+		FAD9F2F82292BA0F00E537E3 /* NiuQi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NiuQi.mp3; sourceTree = "<group>"; };
+		FAD9F2F92292BA0F00E537E3 /* bg1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bg1.mp3; sourceTree = "<group>"; };
+		FAD9F2FA2292BA0F00E537E3 /* NiuSan.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NiuSan.mp3; sourceTree = "<group>"; };
+		FAD9F2FB2292BA0F00E537E3 /* NiuNone.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NiuNone.mp3; sourceTree = "<group>"; };
+		FAD9F2FC2292BA0F00E537E3 /* NiuSi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NiuSi.mp3; sourceTree = "<group>"; };
+		FAD9F2FD2292BA0F00E537E3 /* NiuEr.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NiuEr.mp3; sourceTree = "<group>"; };
+		FAD9F2FE2292BA0F00E537E3 /* FamaleZhaDanNiu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FamaleZhaDanNiu.mp3; sourceTree = "<group>"; };
+		FAD9F2FF2292BA0F00E537E3 /* FamaleSiHuaNiu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FamaleSiHuaNiu.mp3; sourceTree = "<group>"; };
+		FAD9F3002292BA0F00E537E3 /* NiuYi.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NiuYi.mp3; sourceTree = "<group>"; };
+		FAD9F3012292BA0F00E537E3 /* NiuWu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NiuWu.mp3; sourceTree = "<group>"; };
+		FAD9F3022292BA0F00E537E3 /* NiuBa.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = NiuBa.mp3; sourceTree = "<group>"; };
+		FAD9F3032292BA0F00E537E3 /* FamaleWuHuaNiu.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = FamaleWuHuaNiu.mp3; sourceTree = "<group>"; };
 		FAE17C1A228C45FA007B4A6E /* BetResultView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BetResultView.m; sourceTree = "<group>"; };
 		FAE17C1B228C45FA007B4A6E /* BetResultView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BetResultView.h; sourceTree = "<group>"; };
 		FAFBE36C228AF6AB00301E55 /* OpenResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenResultTableViewCell.h; sourceTree = "<group>"; };
@@ -195,6 +228,8 @@
 				FAFBE36E228AF6AB00301E55 /* SinglopenResultView.m */,
 				FAE17C1B228C45FA007B4A6E /* BetResultView.h */,
 				FAE17C1A228C45FA007B4A6E /* BetResultView.m */,
+				FA9DCF7D228EBEEF0025E9C1 /* RecentlyCowResultView.h */,
+				FA9DCF7E228EBEEF0025E9C1 /* RecentlyCowResultView.m */,
 			);
 			path = "百人牛牛";
 			sourceTree = "<group>";
@@ -293,6 +328,7 @@
 				FABCD746226AB9BB002311E1 /* ViewController.h */,
 				FABCD747226AB9BB002311E1 /* ViewController.m */,
 				FABCD780226AD14B002311E1 /* LaunchScreen.storyboard */,
+				FAD9F2F42292BA0F00E537E3 /* 百人牛牛 */,
 				FABCD74C226AB9BC002311E1 /* Assets.xcassets */,
 				FABCD751226AB9BC002311E1 /* Info.plist */,
 				FABCD752226AB9BC002311E1 /* main.m */,
@@ -337,6 +373,29 @@
 				FABCD784226B25D3002311E1 /* PrefixHeader.pch */,
 			);
 			path = Macros;
+			sourceTree = "<group>";
+		};
+		FAD9F2F42292BA0F00E537E3 /* 百人牛牛 */ = {
+			isa = PBXGroup;
+			children = (
+				FAD9F2F92292BA0F00E537E3 /* bg1.mp3 */,
+				FAD9F2FB2292BA0F00E537E3 /* NiuNone.mp3 */,
+				FAD9F3002292BA0F00E537E3 /* NiuYi.mp3 */,
+				FAD9F2FD2292BA0F00E537E3 /* NiuEr.mp3 */,
+				FAD9F2FA2292BA0F00E537E3 /* NiuSan.mp3 */,
+				FAD9F2FC2292BA0F00E537E3 /* NiuSi.mp3 */,
+				FAD9F3012292BA0F00E537E3 /* NiuWu.mp3 */,
+				FAD9F2F72292BA0F00E537E3 /* NiuLiu.mp3 */,
+				FAD9F2F82292BA0F00E537E3 /* NiuQi.mp3 */,
+				FAD9F3022292BA0F00E537E3 /* NiuBa.mp3 */,
+				FAD9F2F52292BA0F00E537E3 /* NiuJiu.mp3 */,
+				FAD9F2F62292BA0F00E537E3 /* NiuNiu.mp3 */,
+				FAD9F2FE2292BA0F00E537E3 /* FamaleZhaDanNiu.mp3 */,
+				FAD9F2FF2292BA0F00E537E3 /* FamaleSiHuaNiu.mp3 */,
+				FAD9F3032292BA0F00E537E3 /* FamaleWuHuaNiu.mp3 */,
+			);
+			name = "百人牛牛";
+			path = "../../棋牌资源/百人牛牛";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -444,9 +503,24 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAD9F3042292BA0F00E537E3 /* NiuJiu.mp3 in Resources */,
+				FAD9F3092292BA0F00E537E3 /* NiuSan.mp3 in Resources */,
+				FAD9F30E2292BA0F00E537E3 /* FamaleSiHuaNiu.mp3 in Resources */,
 				FABCD781226AD14B002311E1 /* LaunchScreen.storyboard in Resources */,
+				FAD9F30D2292BA0F00E537E3 /* FamaleZhaDanNiu.mp3 in Resources */,
+				FAD9F3112292BA0F00E537E3 /* NiuBa.mp3 in Resources */,
+				FAD9F3072292BA0F00E537E3 /* NiuQi.mp3 in Resources */,
+				FAD9F30B2292BA0F00E537E3 /* NiuSi.mp3 in Resources */,
+				FAD9F30F2292BA0F00E537E3 /* NiuYi.mp3 in Resources */,
+				FAD9F3062292BA0F00E537E3 /* NiuLiu.mp3 in Resources */,
+				FAD9F3122292BA0F00E537E3 /* FamaleWuHuaNiu.mp3 in Resources */,
+				FAD9F30A2292BA0F00E537E3 /* NiuNone.mp3 in Resources */,
 				FABCD74D226AB9BC002311E1 /* Assets.xcassets in Resources */,
+				FAD9F3052292BA0F00E537E3 /* NiuNiu.mp3 in Resources */,
 				FABCD77F226ACDE8002311E1 /* GameScene.sks in Resources */,
+				FAD9F30C2292BA0F00E537E3 /* NiuEr.mp3 in Resources */,
+				FAD9F3082292BA0F00E537E3 /* bg1.mp3 in Resources */,
+				FAD9F3102292BA0F00E537E3 /* NiuWu.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +598,7 @@
 			files = (
 				FAFBE378228AF6AB00301E55 /* OpenResultView.m in Sources */,
 				FA1ED8242289941B008DF68C /* UITabBar+badge.m in Sources */,
+				FA9DCF7F228EBEEF0025E9C1 /* RecentlyCowResultView.m in Sources */,
 				FABCD778226AC16D002311E1 /* MyScence.m in Sources */,
 				FAA5458C22704896001CCA0C /* SKEmitterNode+STAdditions.m in Sources */,
 				FAFBE37A228AF6AB00301E55 /* OpenResultTableViewCell.m in Sources */,
