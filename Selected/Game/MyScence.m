@@ -96,7 +96,7 @@
         [self sendChipToDesk];
         //第18秒开始结束动画
         if (timeCount == 18) {
-            [self countdownAnimation];
+            [self countdownAnimation:3];
         }
     }
     //15秒开始开牌
@@ -247,7 +247,7 @@
     WEAKSELF;
     [_onlineUser setTouchUpInsideBlock:^{
 //        [weakSelf show];
-        [weakSelf countdownAnimation];
+        [weakSelf countdownAnimation:0];
     }];
     [self addChild:_onlineUser];
     
@@ -265,12 +265,57 @@
 }
 
 -(void)playBackGroundMP3{
-    [self playSoundWithFileName:@"NiuNone"];
-    NSLog(@"%@",self.soundIDDict);
-    //    [self playSoundWithFileName:@"NiuYi"];
-    //    [self playSoundWithFileName:@"NiuEr"];
-    //    [self playSoundWithFileName:@"NiuSan"];
+//    [self playSoundWithFileName:@"NiuNone"];
+//    NSLog(@"%@",self.soundIDDict);
+    
+    
+    timeCount = 12;
+    [self firstEnterGame];
+    
+    self.countTimer = [[YYTimer alloc] initWithFireTime:0 interval:1 target:self selector:@selector(timeCountDown) repeats:YES];
+    
 }
+
+/*
+ 第一次进入游戏 根据当前游戏剩余时间进行特殊处理
+ 
+ */
+-(void)firstEnterGame{
+    //剩余时间小于等于15秒时 撒一次筹码 保证开奖时有筹码
+    if (timeCount <= 15) {
+        [self sendChipToDesk];
+    }
+    
+    /*
+     17:从2开始倒计时
+     16:从1开始倒计时
+     15:停止下注
+     */
+    if(timeCount == 17){
+        [self countdownAnimation:2];
+    }else if (timeCount == 16){
+        [self countdownAnimation:1];
+    }else if (timeCount == 15){
+        [self countdownAnimation:0];
+    }
+    /*
+     
+     */
+    else if (timeCount <= 13){
+        self.betStatusLab.text = @"开奖中";
+        [self openCard:1 andResult:@[@"1",@"2",@"3",@"4",@"5"]];
+        [self openCard:2 andResult:@[@"1",@"2",@"3",@"4",@"5"]];
+        [self openCard:3 andResult:@[@"1",@"2",@"3",@"4",@"5"]];
+        [self openCard:0 andResult:@[@"1",@"2",@"3",@"4",@"5"]];
+        if (timeCount < 11) {
+            [self deskShowWin:@[@1,@3,@5]];
+        }
+        if(timeCount == 0){
+            [self closeAllCard];
+        }
+    }
+}
+
 
 //播放音效
 -(void)playSoundWithFileName:(NSString *)fileName{
@@ -785,8 +830,8 @@
     
 }
 
-//倒计时动画
--(void)countdownAnimation{
+//倒计时动画 传需要显示的时间个数
+-(void)countdownAnimation:(int)lastTime{
 //    SKTexture *num1 = [SKTexture textureWithImageNamed:@"num1"];
 //    SKEmitterNode *emitter = [SKEmitterNode new];
 //    emitter.particleTexture = num1;
@@ -808,9 +853,13 @@
 //    emitter.position = CGPointMake(ScreenWidth/2, ScreenHeight/2);
 //    [self addChild:emitter];
     
+    int showCount = 3 - lastTime;
     
-    NSArray *namearr = @[@"countdown3",@"countdown2",@"countdown1",@"停止下注"];
-    for (int i = 0; i < 4; i++) {
+    NSMutableArray *namearr = [NSMutableArray arrayWithArray:@[@"countdown3",@"countdown2",@"countdown1",@"停止下注"]];
+    if (showCount) {
+        [namearr removeObjectsInRange:NSMakeRange(0, showCount)];
+    }
+    for (int i = 0; i < namearr.count; i++) {
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW,(int64_t)(i*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -859,7 +908,7 @@
         winSp.position = self.deskSpriteArr[num.intValue].position;
         [self addChild:winSp];
         //一轮游戏结束后隐藏
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,(int64_t)(10*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW,(int64_t)((timeCount - 1)*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             [winSp runAction:[SKAction scaleXBy:0 y:0 duration:0.5] completion:^{
                 [winSp removeFromParent];
             }];

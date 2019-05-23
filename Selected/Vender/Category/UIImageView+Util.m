@@ -8,7 +8,7 @@
 
 #import "UIImageView+Util.h"
 #import "UIImage+Util.h"
-//#import "UIImageView+WebCache.h"
+#import "UIImageView+WebCache.h"
 
 @implementation UIImageView (Util)
 
@@ -35,9 +35,9 @@
         cornerRadius = self.bounds.size.height/2;
     }
     WEAKSELF;
-//    [self sd_setImageWithURL:[NSURL URLWithString:url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-//        [weakSelf setLocaImage:image withCornerRadius:cornerRadius];
-//    }];
+    [self sd_setImageWithURL:[NSURL URLWithString:url] completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [weakSelf setLocaImage:image withCornerRadius:cornerRadius];
+    }];
 }
 
 @end
